@@ -68,4 +68,24 @@ sleepiest_guard = sorted(parser.guards.values(), key=lambda x: x.time_sleeping)[
 most_consistent_guard = sorted(parser.guards.values(), key=lambda x: x.favorite_minute_to_sleep[1])[-1]
 ```
 
+### Day 5: Alchemical Reduction
+
+This one is fun. This could be a very long string, so you don't want to actually do string manipulation directly. A stack is the right data structure here, and all you're doing is thinking about the very end of the stack. Go through the input one character at a time, and if it reacts with the head of the stack, then pop off the stack and move along. Otherwise add it to the stack. 
+
+```python
+def reduce_polymer(polymer):
+    """
+    A polymer is a string of upper and lower case characters. If the upper and lower case versions of the
+    same letter touch, they explode and should both be removed from the chain.
+    """
+    stack = list()
+
+    for c in polymer:
+        if stack and c.swapcase() == stack[-1]:
+            stack.pop()
+        else:
+            stack.append(c)
+
+    return ''.join(stack)
+```
 (To be continued...)
